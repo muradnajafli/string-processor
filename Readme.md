@@ -1,4 +1,4 @@
-# Kotlin String Processor.
+# String Processor.
 
 ## Purpose
 Get familiar with basic Kotlin syntax (types, loops, conditions, functions). Work with Kotlin classes, interfaces and inheritance.
