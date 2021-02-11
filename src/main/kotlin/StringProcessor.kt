@@ -20,8 +20,8 @@ class StringProcessor {
         private set
 
     /**
-     * Process single string with given Processor. In case string is null return value from property.
-     * In case of null string replace it with defaultString property from the class
+     * Process single string with given Processor. In case modified string is null return value from property.
+     * In case of input string is null replace it with defaultString property from the class
      * @param input string to process or null value
      * @param processors array of processors to apply to the input string
      * @return modified string by all given process from the input
