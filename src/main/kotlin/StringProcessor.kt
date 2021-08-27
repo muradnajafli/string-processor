@@ -29,11 +29,11 @@ class StringProcessor {
     fun process(input: String?, processors: Array<Processor>): String = TODO()
 
     /**
-     * Process array of string by given processors.
-     * Processing should be done in place, so original array of strings will be modified by given processor.
+     * Process array of string by the given processors.
+     * Processing should be done in place, so the original array of strings will be modified by the given processor.
      * Function return affected strings in the array by the processor.
      * @param inputs array of strings to process
-     * @param processors array of processors to apply to the each input string
+     * @param processors array of processors to apply to each input string
      * @return number of input strings affected by at least one processor
      */
     fun process(inputs: Array<String?>, processors: Array<Processor>): Int = TODO()
