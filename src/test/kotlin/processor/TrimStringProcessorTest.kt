@@ -14,28 +14,28 @@ class TrimStringProcessorTest {
     }
 
     @Test
-    fun check_trim_single_space() {
+    fun `spaces should be trimmed`() {
         val input = " trim "
         val result = trimProcessor.process(input)
         assertEquals("trim", result)
     }
 
     @Test
-    fun check_trim_single_tab() {
+    fun `tabs should be trimmed`() {
         val input = "   trim    "
         val result = trimProcessor.process(input)
         assertEquals("trim", result)
     }
 
     @Test
-    fun check_trim_multiple_space() {
+    fun `multiple spaces should be trimmed`() {
         val input = "\ttrim\t"
         val result = trimProcessor.process(input)
         assertEquals("trim", result)
     }
 
     @Test
-    fun check_trim_multiple_tab() {
+    fun `multiple tabs should be trimmed`() {
         val input = "\t\ttrim\t\t"
         val result = trimProcessor.process(input)
         assertEquals("trim", result)

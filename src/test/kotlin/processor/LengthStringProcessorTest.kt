@@ -3,10 +3,22 @@ package processor
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.Parameterized
 
+@RunWith(Parameterized::class)
 class LengthStringProcessorTest {
 
     private lateinit var lengthProcessor: LengthStringProcessor
+
+    @Parameterized.Parameter
+    lateinit var shortInput: ConditionData
+
+    @Parameterized.Parameter(1)
+    lateinit var mediumInput: ConditionData
+
+    @Parameterized.Parameter(2)
+    lateinit var longInput: ConditionData
 
     @Before
     fun setup() {
@@ -14,72 +26,57 @@ class LengthStringProcessorTest {
     }
 
     @Test
-    fun process_short_string() {
-        val shortString = "test"
-        val result = lengthProcessor.process(shortString)
-        assertEquals("short $shortString", result)
+    fun `when input satisfies SHORT condition should return short + input`() {
+        for (shortString in shortInput.strings) {
+            val result = lengthProcessor.process(shortString)
+            assertEquals("short $shortString", result)
+        }
     }
 
     @Test
-    fun process_empty_string() {
-        val emptyString = ""
-        val result = lengthProcessor.process(emptyString)
-        assertEquals("short ", result)
+    fun `when input satisfies MEDIUM condition should return medium + input`() {
+        for (mediumString in mediumInput.strings) {
+            val result = lengthProcessor.process(mediumString)
+            assertEquals("medium $mediumString", result)
+        }
     }
 
     @Test
-    fun process_max_short_string() {
-        val shortString = "short"
-        val result = lengthProcessor.process(shortString)
-        assertEquals("short $shortString", result)
+    fun `when input satisfies LONG condition should return long + input`() {
+        for (longString in longInput.strings) {
+            val result = lengthProcessor.process(longString)
+            assertEquals("long $longString", result)
+        }
     }
 
     @Test
-    fun process_min_medium_string() {
-        val mediumString = "banana"
-        val result = lengthProcessor.process(mediumString)
-        assertEquals("medium $mediumString", result)
-    }
-
-    @Test
-    fun process_medium_string() {
-        val mediumString = "banana v2"
-        val result = lengthProcessor.process(mediumString)
-        assertEquals("medium $mediumString", result)
-    }
-
-    @Test
-    fun process_max_medium_string() {
-        val mediumString = "banana max"
-        val result = lengthProcessor.process(mediumString)
-        assertEquals("medium $mediumString", result)
-    }
-
-    @Test
-    fun process_min_long_string() {
-        val longString = "long string"
-        val result = lengthProcessor.process(longString)
-        assertEquals("long $longString", result)
-    }
-
-    @Test
-    fun process_long_string() {
-        val longString = "long string v2"
-        val result = lengthProcessor.process(longString)
-        assertEquals("long $longString", result)
-    }
-
-    @Test
-    fun process_max_long_string() {
-        val longString = "long string check v2"
-        val result = lengthProcessor.process(longString)
-        assertEquals("long $longString", result)
-    }
-
-    @Test
-    fun process_string_no_changes() {
+    fun `when string doesn't satisfy any condition should return as is`() {
         val tooLongString = "too long string check "
         val result = lengthProcessor.process(tooLongString)
         assertEquals(tooLongString, result)
+    }
+
+
+    /** Test data */
+    class ConditionData private constructor(val strings: List<String>) {
+
+        companion object {
+            // length 0 .. 5
+            fun short() = ConditionData(List(6) { index -> "S".repeat(index) })
+
+            // length 6 .. 10
+            fun medium() = ConditionData(List(5) { index -> "M".repeat(index + 6) })
+
+            // length 11 .. 20
+            fun long() = ConditionData(List(10) { index -> "L".repeat(index + 11) })
+        }
+    }
+
+    companion object {
+        @JvmStatic
+        @Parameterized.Parameters()
+        fun data() = listOf(
+            arrayOf(ConditionData.short(), ConditionData.medium(), ConditionData.long())
+        )
     }
 }
