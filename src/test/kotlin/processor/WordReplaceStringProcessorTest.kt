@@ -19,21 +19,21 @@ class WordReplaceStringProcessorTest {
     }
 
     @Test
-    fun replace_string_no_occurrences() {
+    fun `when input doesn't equal to substringToReplace it should be returned as is`() {
         val input = "some string"
         val result = replaceProcessor.process(input)
         assertEquals(input, result)
     }
 
     @Test
-    fun replace_string_single_occurrences() {
+    fun `when input contains substringToReplace it should be replaced to replacement`() {
         val input = "some string $STRING_TO_REPLACE"
         val result = replaceProcessor.process(input)
         assertEquals("some string $REPLACEMENT", result)
     }
 
     @Test
-    fun replace_string_multiple_occurrences() {
+    fun `when input contains severall substringToReplace all of them should be replaced to replacement`() {
         val input = "$STRING_TO_REPLACE some string $STRING_TO_REPLACE"
         val result = replaceProcessor.process(input)
         assertEquals("$REPLACEMENT some string $REPLACEMENT", result)
