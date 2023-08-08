@@ -11,5 +11,7 @@ class WordReplaceStringProcessor(
      * @param input origin string
      * @return string that removes all occurrences of substring in the original string
      */
-    override fun process(input: String): String = TODO()
+    override fun process(input: String): String {
+        return input.replace(substringToReplace, replacement)
+    }
 }

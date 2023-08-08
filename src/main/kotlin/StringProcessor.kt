@@ -9,7 +9,8 @@ class StringProcessor {
      */
     var defaultString: String = ""
         set(value) {
-            TODO()
+            field = value
+            isDefaultChanged = true
         }
 
     /**
@@ -26,7 +27,19 @@ class StringProcessor {
      * @param processors array of processors to apply to the input string
      * @return modified string by all given process from the input
      */
-    fun process(input: String?, processors: Array<Processor>): String = TODO()
+    fun process(input: String?, processors: Array<Processor>): String {
+        val processedInput = input ?: defaultString
+        var modifiedInput = processedInput
+
+        if (processedInput != defaultString) {
+            for (processor in processors) {
+                modifiedInput = processor.process(modifiedInput)
+            }
+
+        }
+
+        return modifiedInput
+    }
 
     /**
      * Process array of string by the given processors.
@@ -36,6 +49,21 @@ class StringProcessor {
      * @param processors array of processors to apply to each input string
      * @return number of input strings affected by at least one processor
      */
-    fun process(inputs: Array<String?>, processors: Array<Processor>): Int = TODO()
+    fun process(inputs: Array<String?>, processors: Array<Processor>): Int {
+        var affectedCount = 0
 
+        for (i in inputs.indices) {
+            if (inputs[i] != null) {
+                val modifiedInput = process(inputs[i], processors)
+                if (modifiedInput != inputs[i]) {
+                    inputs[i] = modifiedInput
+                    affectedCount++
+                }
+            }
+
+        }
+
+        return affectedCount
+
+    }
 }

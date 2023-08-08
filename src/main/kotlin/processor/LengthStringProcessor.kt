@@ -1,5 +1,6 @@
 package processor
 
+
 class LengthStringProcessor : Processor {
     /**
      * Add an additional word to the original string depending on the string length:
@@ -10,5 +11,13 @@ class LengthStringProcessor : Processor {
      * @param input original string
      * @return modified string depending on the string length
      */
-    override fun process(input: String): String = TODO()
+    override fun process(input: String): String {
+        val prefix = when (input.length) {
+            in 0.. 5 -> "short "
+            in 6.. 10 -> "medium "
+            in 11.. 20 -> "long "
+            else -> {""}
+        }
+        return prefix + input
+    }
 }
