@@ -30,7 +30,7 @@ class StringProcessor {
     fun process(input: String?, processors: Array<Processor>): String {
         var modifiedInput = input ?: defaultString
 
-        if (modifiedInput != defaultString){
+        if (modifiedInput != defaultString) {
             for (processor in processors) {
                 modifiedInput = processor.process(modifiedInput)
             }
