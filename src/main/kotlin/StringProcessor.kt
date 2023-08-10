@@ -28,14 +28,12 @@ class StringProcessor {
      * @return modified string by all given process from the input
      */
     fun process(input: String?, processors: Array<Processor>): String {
-        val processedInput = input ?: defaultString
-        var modifiedInput = processedInput
+        var modifiedInput = input ?: defaultString
 
-        if (processedInput != defaultString) {
+        if (modifiedInput != defaultString){
             for (processor in processors) {
                 modifiedInput = processor.process(modifiedInput)
             }
-
         }
 
         return modifiedInput
