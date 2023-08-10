@@ -50,15 +50,14 @@ class StringProcessor {
     fun process(inputs: Array<String?>, processors: Array<Processor>): Int {
         var affectedCount = 0
 
-        for (i in inputs.indices) {
-            if (inputs[i] != null) {
-                val modifiedInput = process(inputs[i], processors)
-                if (modifiedInput != inputs[i]) {
-                    inputs[i] = modifiedInput
+        for ((index, input) in inputs.withIndex()) {
+            if (input != null) {
+                val modifiedInput = process(input, processors)
+                if (modifiedInput != input) {
+                    inputs[index] = modifiedInput
                     affectedCount++
                 }
             }
-
         }
 
         return affectedCount
