@@ -59,6 +59,15 @@ class StringProcessor {
                 }
             }
         }
+//        Another way:
+//
+//        inputs.filterNotNull().forEachIndexed { index, input ->
+//            val modifiedInput = process(input, processors)
+//            if (modifiedInput != input) {
+//                inputs[index] = modifiedInput
+//                affectedCount++
+//            }
+//        }
 
         return affectedCount
 
