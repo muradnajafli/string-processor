@@ -13,9 +13,9 @@ class LengthStringProcessor : Processor {
      */
     override fun process(input: String): String {
         val prefix = when (input.length) {
-            in 0 .. 5 -> "short "
-            in 6.. 10 -> "medium "
-            in 11.. 20 -> "long "
+            in 0..5 -> "short "
+            in 6..10 -> "medium "
+            in 11..20 -> "long "
             else -> {""}
         }
         return prefix + input
